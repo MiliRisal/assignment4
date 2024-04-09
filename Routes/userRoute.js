@@ -16,7 +16,7 @@ async function getUser(req, res, next) {
   }
 }
 
-// Create a new user
+// creating a new user
 router.post("/", async (req, res) => {
   const { email, password, username, purchaseHistory, shippingAddress } =
     req.body;
@@ -35,7 +35,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Get all users
+// getting all users
 router.get("/", async (req, res) => {
   try {
     const users = await User.find();
@@ -45,12 +45,12 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Get a single user
+// getting a single user
 router.get("/:id", getUser, (req, res) => {
   res.json(res.user);
 });
 
-// Update a user using PUT
+// updating a user using PUT
 router.put("/:id", getUser, async (req, res) => {
   const { email, password, username, purchaseHistory, shippingAddress } =
     req.body;
@@ -77,7 +77,7 @@ router.put("/:id", getUser, async (req, res) => {
   }
 });
 
-// Delete a user
+// deleting a user
 router.delete("/:id", getUser, async (req, res) => {
   try {
     await res.user.deleteOne();

@@ -21,7 +21,7 @@ async function getOrdersByUser(req, res, next) {
   }
 }
 
-// Create a new order for a user
+// creating a new order for a user
 router.post("/:userId", async (req, res) => {
   const { orderDate } = req.body;
   const userId = req.params.userId;
@@ -37,12 +37,22 @@ router.post("/:userId", async (req, res) => {
   }
 });
 
-// Get orders for a user
+// getting orders for a specific user
 router.get("/:userId", getOrdersByUser, (req, res) => {
   res.json(res.orders);
 });
 
-// Update an order
+// getting orders for all users
+router.get("/", async (req, res) => {
+  try {
+    const orders = await Order.find().populate("user", "username");
+    res.json(orders);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// updating an order
 router.put("/:orderId", async (req, res) => {
   const { orderDate } = req.body;
   try {
@@ -60,7 +70,7 @@ router.put("/:orderId", async (req, res) => {
   }
 });
 
-// Delete an order
+// deleting an order
 router.delete("/:orderId", async (req, res) => {
   try {
     await Order.findByIdAndDelete(req.params.orderId);

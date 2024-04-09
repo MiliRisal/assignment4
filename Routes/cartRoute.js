@@ -19,7 +19,7 @@ async function getCartByUser(req, res, next) {
   }
 }
 
-// Create a new cart for a user
+// Creating a new cart for a user
 router.post("/:userId", async (req, res) => {
   const { products, quantities } = req.body;
   const userId = req.params.userId;
@@ -36,12 +36,12 @@ router.post("/:userId", async (req, res) => {
   }
 });
 
-// Get a user's cart
+// getting a user's cart
 router.get("/:userId", getCartByUser, (req, res) => {
   res.json(res.cart);
 });
 
-// Update a user's cart
+// updating a user's cart
 router.put("/:userId", getCartByUser, async (req, res) => {
   const { products, quantities } = req.body;
   try {
@@ -54,7 +54,7 @@ router.put("/:userId", getCartByUser, async (req, res) => {
   }
 });
 
-// Delete a user's cart
+// deleting a user's cart
 router.delete("/:userId", getCartByUser, async (req, res) => {
   try {
     await res.cart.deleteOne();

@@ -20,7 +20,7 @@ async function getCommentsByProduct(req, res, next) {
   }
 }
 
-// Get all comments
+// getting all comments
 router.get("/", async (req, res) => {
   try {
     const comments = await Comments.find().populate("user", "username");
@@ -30,7 +30,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Create a new comment for a product
+// creating a new comment for a product
 router.post("/:productId", async (req, res) => {
   const { user, rating, images, text } = req.body;
   const productId = req.params.productId;
@@ -49,12 +49,12 @@ router.post("/:productId", async (req, res) => {
   }
 });
 
-// Get comments for a product
+// getting comments for a product
 router.get("/:productId", getCommentsByProduct, (req, res) => {
   res.json(res.comments);
 });
 
-// Update a comment
+// updating a comment
 router.put("/:commentId", async (req, res) => {
   const { user, rating, images, text } = req.body;
   try {
@@ -81,7 +81,7 @@ router.put("/:commentId", async (req, res) => {
   }
 });
 
-// Delete a comment
+// deleting a comment
 router.delete("/:commentId", async (req, res) => {
   try {
     await Comments.findByIdAndDelete(req.params.commentId);

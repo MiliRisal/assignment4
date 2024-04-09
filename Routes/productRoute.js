@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Product = require("../models/Product");
+const Product = require("../Models/Product");
 
 // Middleware to get a product by ID
 async function getProduct(req, res, next) {
@@ -16,7 +16,7 @@ async function getProduct(req, res, next) {
   }
 }
 
-// Get all products
+// getting all products
 router.get("/", async (req, res) => {
   try {
     const products = await Product.find();
@@ -26,12 +26,12 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Get a single product
+// getting a single product
 router.get("/:id", getProduct, (req, res) => {
   res.json(res.product);
 });
 
-// Create a new product
+// creating a new product
 router.post("/", async (req, res) => {
   const product = new Product({
     description: req.body.description,
@@ -47,7 +47,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Update a product using PUT
+// updating a product using PUT
 router.put("/:id", getProduct, async (req, res) => {
   try {
     const updatedProduct = await Product.findOneAndUpdate(
@@ -64,7 +64,7 @@ router.put("/:id", getProduct, async (req, res) => {
   }
 });
 
-// Delete a product
+// deleting a product
 router.delete("/:id", getProduct, async (req, res) => {
   try {
     await res.product.deleteOne();
