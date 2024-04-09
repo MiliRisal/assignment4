@@ -1,12 +1,12 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
-const connectDB = require("./mongodb");
-const productRoutes = require("./Routes/productRoutes");
-const userRoutes = require("./Routes/userRoutes");
-const commentsRoutes = require("./Routes/commentsRoutes");
-const cartRoutes = require("./Routes/cartRoutes");
-const orderRoutes = require("./Routes/orderRoutes");
+const connectDB = require("./connection");
+const productRoutes = require("./Routes/productRoute");
+const userRoutes = require("./Routes/userRoute");
+const commentsRoutes = require("./Routes/commentsRoute");
+const cartRoutes = require("./Routes/cartRoute");
+const orderRoutes = require("./Routes/orderRoute");
 
 dotenv.config();
 const app = express();
